@@ -1,39 +1,72 @@
+const levels = [10, 50, 100, 200, 500];
+const messages = [
+  "Too high! Enter a new guess, or type q to quit.",
+  "Too low! Enter a new guess, or type q to quit."
+];
 
-PLAYER_NAME = prompt("Hi there. kindly tell us your name");
+let PLAYER_NAME = prompt("Hi there. Kindly tell us your name.");
 while (!PLAYER_NAME) {
-  PLAYER_NAME = prompt("We need your name to proceed the game");
+  PLAYER_NAME = prompt("We need your name to proceed with the game.");
 }
 
-alert(`Hi ${PLAYER_NAME}!, welcome and thank you for playing my guessing game!`)
+alert(`Hi ${PLAYER_NAME}! Welcome and thank you for playing my guessing game!`);
 
-let maximum = parseInt(prompt("Enter the maximum number!"));
-// if entered not a number (falsy maximum)
-while (!maximum) {
-    maximum = parseInt(prompt("Enter a valid number!"));
-}
+let currentLevel = 0;
+let totalAttempts = 0;
 
-// JS random number from 1 to maximum that we are trying to guess
-// (((random num from 0 to 1) * maximum ) chopping off decimal) + 1
-const targetNum = Math.floor(Math.random() * maximum) + 1;
+while (currentLevel < levels.length) {
+  let maximum = levels[currentLevel];
+  let targetNum = Math.floor(Math.random() * maximum) + 1;
+  let guess = prompt("Enter your first guess!");
 
-let guess = parseInt(prompt("Enter your first guess!"));
-let attempts = 1;
-
-while (parseInt(guess) !== targetNum) {
-
-    if (guess === 'q') break;
-
-    attempts++;
-
-    if (guess > targetNum) {
-        guess = prompt("Too high! Enter a new guess, or type q to quit");
-      } else {
-        guess = prompt("Too low! Enter a new guess, or type q to quit");
-      }
+  // Check if the user entered 'q' to quit the game
+  if (guess === "q") {
+    alert("OK. BYE");
+    break;
   }
 
-  if (guess === 'q') {
-      prompt("OK. BYE");
+  // Convert the guess to a number and make sure it's valid
+  guess = parseInt(guess);
+  while (isNaN(guess)) {
+    guess = prompt("Enter a valid guess!");
+  }
+
+  let attempts = 1;
+
+  while (guess !== targetNum) {
+    if (guess === "q") {
+      alert("OK. BYE");
+      break;
+    }
+
+    attempts++;
+    totalAttempts++;
+
+    if (guess > targetNum) {
+      guess = prompt(messages[0]);
     } else {
-      prompt(`YOU GOT IT ${PLAYER_NAME}! It took you ${attempts} guess(es)`);
-      }
+      guess = prompt(messages[1]);
+    }
+
+    // Check if the user entered 'q' to quit the game
+    if (guess === "q") {
+      alert("OK. BYE");
+      break;
+    }
+
+    // Convert the guess to a number and make sure it's valid
+    guess = parseInt(guess);
+    while (isNaN(guess)) {
+      guess = prompt("Enter a valid guess!");
+    }
+  }
+
+  if (guess === "q") {
+    break;
+  } else {
+    currentLevel++;
+    alert(`You got it ${PLAYER_NAME}! It took you ${attempts} guess(es).`);
+  }
+}
+
+alert(`Thanks for playing, ${PLAYER_NAME}. You reached level ${currentLevel} in ${totalAttempts} attempt(s).`);
