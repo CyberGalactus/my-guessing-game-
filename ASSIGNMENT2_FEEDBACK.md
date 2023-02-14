@@ -1,5 +1,31 @@
 Hi Edu!
 
+Updated 14-2-2023
+
+Almost there! You have an array, but you aren't using it!
+
+Line 14 sets the value of currentLevel:
+
+   let currentLevel = 0;
+
+Lne 18 then uses it to get a value from te array:
+   let maximum = levels[currentLevel];
+
+So this will always return levels[0] - you need to ask the user what level they want to use. Create a prompt showing the different levels, and ak the user to enter what level they want - 10, 50, 100, 200 or 500.
+
+You'll need to validate the user choice - you can use the includes() function - https://www.w3schools.com/jsref/jsref_includes_array.asp - to see if the user choice is one of the values in the array.
+
+You've also got:
+
+   if (guess === "q") {
+      alert("OK. BYE");
+      break;
+    }
+a few times - you only really need it once!
+
+
+---------------------------------------------------------------------------
+
 Nice work, the game works well and I like how the user can enter their own maximum number. The major problem is it lacks an array, which is one of the requirements of the assignment.
 
 The easiest way to fix this is to let the user choose the max number from an array, rather than enter their own number. Create an array of maximum numbers:
@@ -26,7 +52,7 @@ GODKÄNT:
 
 Constant or let variable: ✅ 
 
-Array: ❌
+Array: ✅
 
 Random selection from array: ❌
 
@@ -49,8 +75,8 @@ Comparison with an array: ❌
 
 Nested logic: ✅
 
-Input validation: ❌
-user can enter letters - ave a look at adding some regex for numbers only
+Input validation: ✅
+user can enter letters - have a look at adding some regex for numbers only
 
 Cancel button handling: ❌
 Add a test if (guess == null)
