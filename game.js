@@ -12,8 +12,14 @@ while (!PLAYER_NAME) {
 alert(`Hi ${PLAYER_NAME}! Welcome and thank you for playing my guessing game!`);
 
 let currentLevel = 0;
+let userLevel = 0;
 let totalAttempts = 0;
+while (!levels.includes(userLevel)) {
+  let userGuess=prompt("Enter the highest number. You can choose: 10, 50, 100, 200 or 500");
+  userLevel=parseInt(userGuess);
 
+}
+currentLevel = levels.indexOf(userLevel)
 while (currentLevel < levels.length) {
   let maximum = levels[currentLevel];
   let targetNum = Math.floor(Math.random() * maximum) + 1;
